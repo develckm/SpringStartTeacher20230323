@@ -1,6 +1,7 @@
 package com.acorn.springstartteacher.dto;
 
 import lombok.Data;
+import org.springframework.context.annotation.Bean;
 
 @Data
 public class UsersDto {
@@ -11,7 +12,7 @@ public class UsersDto {
     private String imgPath;
     private String email;
     private java.util.Date postTime;
-    private String birth; 
+    private String birth;
     private String gender;
     private String address;
     private String detailAddress;

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>
+        sum.do param.a+param.b=
+        <span th:text="${param.a}+${param.b}"></span>
+    </h1>
+    <p>param : 타임리프가 뷰를 렌더하면서 쿼리스트링을 객체로 변경</p>
+    <h1>
+        sum.do a+b=
+        <span th:text="${a}+${b}"></span>
+    </h1>
+    <p>a,b : 컨트롤러에서 타임리프를 렌더링할때 model 로 전달한 객체 </p>
+    <p>컨트롤러에서 파라미터를 받을 때는 파라미터와 같은 이름의 매개변수를 작성하면된다.(만약 형변환 불가면 오류 : 400)</p>
+</body>
+</html>

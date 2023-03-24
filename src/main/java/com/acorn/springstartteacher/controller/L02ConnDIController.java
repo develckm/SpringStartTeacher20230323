@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -28,6 +29,70 @@ public class L02ConnDIController {
         this.dataSource = dataSource;
         this.usersMapper = usersMapper;
     }
+    @GetMapping("/delete.do")
+    public void deleteForm(@RequestParam(name = "u_id")String uId){}
+    @GetMapping("/signup.do")
+    public void signupForm(){}
+    @PostMapping("/signup.do")
+    public String signupAction(
+            UsersDto user,
+            RedirectAttributes redirectAttributes){ //폼의 파라미터를 맵핑
+        //객체의 필드는 자료형 null, 기본형은 0 이 기본값 => 파라미터가 없으면 0 or null
+        int insert=0;
+        String actionMsg="";
+        String errorMsg=null;
+        String redirectPage="";
+        try {
+            insert=usersMapper.insertOne(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            errorMsg=e.getMessage();
+
+        }
+
+        if(insert>0){
+            redirectPage= "redirect:/";
+            actionMsg="회원 가입 성공";
+        }else{
+            redirectPage="redirect:/users/signup.do";
+            actionMsg="회원가입 실패 : "+errorMsg;
+        }
+        redirectAttributes.addFlashAttribute("actionMsg",actionMsg);
+        return redirectPage;
+    }
+
+
+    @PostMapping ("/delete.do")
+    public String deleteAction(
+            @RequestParam(name = "u_id")String uId,
+            @RequestParam(name = "pw")String pw,
+            RedirectAttributes redirectAttributes){
+        int delete=0;
+        String actionMsg="";
+        String errorMsg=null;
+        String redirectPage="";
+        try {
+            delete=usersMapper.deleteByUIdAndPw(uId,pw);
+        }catch (Exception e){
+            e.printStackTrace();
+            errorMsg=e.getMessage();
+        }
+        if(delete>0){
+            redirectPage= "redirect:/users/list.do";
+            actionMsg="회원 탈퇴 성공";
+        }else{
+            redirectPage="redirect:/users/delete.do?u_id="+uId;
+            if(errorMsg!=null){
+                actionMsg="회원탈퇴 실패 db 오류 : "+errorMsg;
+            }else{
+                actionMsg="아이디와 비밀번호를 확인하세요";
+            }
+        }
+        redirectAttributes.addFlashAttribute("actionMsg",actionMsg);
+        return redirectPage;
+
+    }
+
     @GetMapping("/update.do")
     public void updateForm(
             @RequestParam(name = "u_id")String uId,

@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<script src="/bootstrap/js/bootstrap.bundle.js"></script>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="<%=contextPath%>/">HOME</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Model1Board
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/board/list.do">리스트</a></li>
+                        <li><a class="dropdown-item" href="/board/insert.do">등록폼</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="d-flex breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a class="" href="/users/login.do">로그인</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="" href="/users/signup.do">회원가입</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<th:block th:if="${actionMsg}">
+    <div class="modal fade" id="actionMsgModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">액션 메세지</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <strong th:text="${actionMsg}"></strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const actionModal=new bootstrap.Modal(document.getElementById("actionMsgModal"),{})
+        actionModal.show();
+    </script>
+</th:block>

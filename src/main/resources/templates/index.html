@@ -10,6 +10,7 @@ spring boot 설정에 /templates 폴더 하위에 있는 모든 html 을 타임�
     <title>Title</title>
 </head>
 <body>
+    <th:block th:include="/headerNav.html"></th:block>
     <h1>
         안녕 스프링 부트
         <span th:text="${1+2}"></span>

@@ -19,6 +19,15 @@
         <result column="detail_address" property="detailAddress"/>
         <result column="permission" property="permission"/>
     </resultMap>
+    <insert id="insertOne">
+        INSERT INTO users
+        (u_id, pw, name, phone, img_path, email, birth, gender, address, detail_address)
+        VALUE
+        (#{uId}, #{pw}, #{name}, #{phone}, #{imgPath}, #{email}, #{birth}, #{gender}, #{address}, #{detailAddress})
+    </insert>
+    <delete id="deleteByUIdAndPw">
+        DELETE FROM users WHERE u_id=#{uId} AND pw=#{pw}
+    </delete>
     <update id="updateOne" parameterType="com.acorn.springstartteacher.dto.UsersDto">
         UPDATE users SET
             name=#{name},

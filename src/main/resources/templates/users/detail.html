@@ -4,6 +4,8 @@
 </head>
 <body>
 <main class="container">
+    <th:block th:include="/headerNav.html"></th:block>
+
     <h1 class="my-4">유저 상세</h1>
     <p>아이디 : <strong th:text="${user.getUId()}"></strong></p>
     <p>이름 : <strong th:text="${user.getName()}"></strong></p>

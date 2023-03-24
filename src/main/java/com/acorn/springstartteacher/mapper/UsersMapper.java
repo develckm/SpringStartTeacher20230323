@@ -9,6 +9,7 @@ import java.util.List;
 public interface UsersMapper {
     List<UsersDto> findAll();
     UsersDto findByUId(String uId); //#{uId}
-
     int updateOne(UsersDto user);
+    int insertOne(UsersDto user);
+    int deleteByUIdAndPw(String uId,String pw);
 }
